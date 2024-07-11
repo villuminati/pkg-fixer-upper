@@ -1,0 +1,16 @@
+===================================================================
+--- ./data/text2.txt
++++ ./data/text1.txt
+@@ -3,9 +3,10 @@
+ 
+ hjkh
+ 
+ 
+-213
++m,.m,m
+ 
+ nlkjdfnds
+ 
++
+ mmmm
+\ No newline at end of file
