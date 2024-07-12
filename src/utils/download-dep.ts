@@ -4,7 +4,7 @@ import { execSync } from "child_process";
 import axios from "axios";
 import * as tar from "tar";
 
-const tempDir = path.join(__dirname, ".tmp");
+const tempDir = path.join(__dirname, process.env.TEMP_DIR!);
 
 async function getPackageMetadata(dep: string) {
     const packageUrl = `https://registry.npmjs.org/${dep}`;
