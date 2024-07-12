@@ -3,7 +3,7 @@ import path from "path";
 import axios from "axios";
 import * as tar from "tar";
 
-const tempDir = path.join(__dirname, process.env.TEMP_DIR!);
+const tempDir = path.join("./", process.env.TEMP_DIR!);
 
 async function getPackageMetadata(dep: string) {
     const packageUrl = `https://registry.npmjs.org/${dep}`;
