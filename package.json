@@ -1,15 +1,23 @@
 {
-  "name": "pkg-fixer-upper",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "bun-types": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@types/diff": "^5.2.1",
-    "diff": "^5.2.0"
-  }
+    "name": "@villuminati/pkg-fixer-upper",
+    "description": "A clone of patch-package",
+    "version": "0.0.1",
+    "module": "index.ts",
+    "type": "module",
+    "author": "villuminati",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/villuminati/pkg-fixer-upper"
+    },
+    "devDependencies": {
+        "bun-types": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@types/diff": "^5.2.1",
+        "diff": "^5.2.0"
+    }
 }
