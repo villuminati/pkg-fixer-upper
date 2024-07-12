@@ -1,6 +1,5 @@
 import fs from "fs-extra";
 import path from "path";
-import { execSync } from "child_process";
 import axios from "axios";
 import * as tar from "tar";
 

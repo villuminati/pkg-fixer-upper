@@ -1,7 +1,7 @@
-import { downloadDep } from "./utils/download-dep";
 import fs from "fs-extra";
-
 import path from "path";
+
+import { downloadDep } from "./utils/download-dep";
 
 async function diffDep(dep: string) {
     console.log("diffing dependency ...");
