@@ -1,29 +1,46 @@
-// import * as fs from "fs";
-// import * as Diff from "diff";
-
 import { downloadDep } from "./utils/download-dep";
+import fs from "fs-extra";
 
-// const text1Path = "./data/text1.txt";
-// const text2Path = "./data/text2.txt";
+import path from "path";
 
-// // Read the contents of text1.txt and text2.txt
-// const text1 = fs.readFileSync(text1Path, "utf8");
-// const text2 = fs.readFileSync(text2Path, "utf8");
+async function diffDep(dep: string) {
+    console.log("diffing dependency ...");
+    let pathToRootOfDep = path.join("node_modules", dep);
+    console.log({ pathToRootOfDep });
+    const metadata = await fs.stat(pathToRootOfDep);
+    console.log(metadata);
 
-// // Create the diff
-// const patch = Diff.createTwoFilesPatch(text2Path, text1Path, text2, text1);
-
-// // Save the diff to diff.patch
-// fs.writeFileSync("./data/diff.patch", patch, "utf8");
-
-// console.log("Diff created and saved to ./data/diff.patch");
-
-const TEMP_DIR = "temp-package/";
-const PATCHES_DIR = "patches/";
+    if (metadata.isDirectory()) {
+        console.log("metadata.isDirectory() is true");
+        const filesAndDirs = await listAllFilesAndDirs(pathToRootOfDep);
+        console.log({ filesAndDirs });
+    }
+}
 
 export function createDiff(deps: string[]) {
     for (let i = 0; i < deps.length; i++) {
-        let pathToRootOfDep = "./node_modules/" + deps[i];
         downloadDep(deps[i]);
+        diffDep(deps[i]);
     }
+}
+async function listAllFilesAndDirs(dirPath: string) {
+    console.log("listAllFilesAndDirs");
+    const entries = await fs.readdir(dirPath, {
+        withFileTypes: true,
+    });
+
+    const filesAndDirs = [];
+
+    for (const entry of entries) {
+        const fullPath = path.join(dirPath, entry.name);
+        const stats = await fs.stat(fullPath);
+
+        if (stats.isDirectory()) {
+            filesAndDirs.push({ name: entry.name, type: "directory" });
+        } else if (stats.isFile()) {
+            filesAndDirs.push({ name: entry.name, type: "file" });
+        }
+    }
+
+    return filesAndDirs;
 }
